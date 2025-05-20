@@ -133,13 +133,15 @@ Para representar a estrutura e o comportamento do sistema FastQuote, utilizamos 
 
 Representa os principais atores do sistema (cliente e vendedor) e suas interações com os processos do sistema.
 
-![diagrama_caso_de_uso_sem_emoji](https://github.com/user-attachments/assets/ffd4ef4e-9620-400b-9368-ff5552ac76a0)
+<img src="https://github.com/user-attachments/assets/ffd4ef4e-9620-400b-9368-ff5552ac76a0" width="1000"/>
+
+---
 
 ### 2. Modelo Entidade-Relacionamento (MER)
 
 Mostra a estrutura de dados e os relacionamentos entre as entidades do banco de dados (cotação, itens e histórico).
 
-![diagrama_mer](https://github.com/user-attachments/assets/cfa6899e-5b04-4030-a4cb-138e29c43d48)
+<img src="https://github.com/user-attachments/assets/cfa6899e-5b04-4030-a4cb-138e29c43d48" width="1000"/>
 
 ### Tecnologias Utilizadas
 
@@ -166,7 +168,7 @@ Mostra a estrutura de dados e os relacionamentos entre as entidades do banco de 
 
 O sistema FastQuote foi desenvolvido com uma arquitetura dividida entre frontend e backend, com integração de planilha de estoque, geração de PDF e envio automatizado via WhatsApp. O fluxo de dados segue as etapas descritas no diagrama abaixo:
 
-![arquitetura_sistema_email](https://github.com/user-attachments/assets/998a1401-0227-4d0a-abff-0a50d504a68d)
+<img src="https://github.com/user-attachments/assets/998a1401-0227-4d0a-abff-0a50d504a68d" width="1100"/>
 
 ---
 
@@ -241,47 +243,70 @@ Ao final da apresentação, o sistema foi homologado pelo cliente.
 
 ## 10. Divulgação
 
-#### Publicações no LinkedIn
-Artigo de João Lucas Las Casas Alves:
+### Publicações no LinkedIn
+
+**Artigo de João Lucas Las Casas Alves:**  
 https://www.linkedin.com/pulse/fastquote-apresenta%C3%A7%C3%A3o-parcial-jo%C3%A3o-lucas-las-casas-alves-qu8wf/
 
-Artigo de Vinicius Mastrangelo Dias:
+**Artigo de Vinicius Mastrangelo Dias:**  
 https://www.linkedin.com/pulse/fastquote-apresenta%C3%A7%C3%A3o-parcial-vinicius-mastrangelo-juasf/?trackingId=31NK68hFwHdIUs1vKZiUZQ%3D%3D
 
-#### Perfis Pessoais:
+### Perfis Pessoais
 
-João Lucas Las Casas Alves: https://www.linkedin.com/in/joaolucas-dev
+- João Lucas Las Casas Alves: https://www.linkedin.com/in/joaolucas-dev  
+- Vinicius Mastrangelo Dias: https://www.linkedin.com/in/vinicius-mastrangelo-177976250
 
-Vinicius Mastrangelo Dias: https://www.linkedin.com/in/vinicius-mastrangelo-177976250
+---
 
 ### Prints das Publicações
-Perfil de João Lucas Las Casas Alves
+
+**Perfil de João Lucas Las Casas Alves**  
 <img src="https://github.com/user-attachments/assets/689cb325-291a-4578-ac5c-8ed73234de06" width="600"/>
-Artigo de João Lucas
+
+**Artigo de João Lucas**  
 <img src="https://github.com/user-attachments/assets/60b482ac-c8c5-49c3-8816-0c8940b4aa1e" width="600"/>
-Artigo de Vinicius Mastrangelo Dias
+
+**Perfil de Vinicius**  
 <img src="https://github.com/user-attachments/assets/77202e24-f524-417d-bf42-ddd4c9d2bd8e" width="600"/>
-Perfil de Vinicius
+
+**Artigo de Vinicius Mastrangelo Dias**  
 <img src="https://github.com/user-attachments/assets/3fe2cc71-a51c-4730-a918-6fcc013dbca6" width="600"/>
-Semana da Tecnologia
+
+---
+
+## Semana da Tecnologia
+
 O projeto FastQuote foi apresentado oficialmente durante a Semana da Tecnologia, em um seminário com a presença de colegas, professores e avaliadores. Abaixo estão os registros fotográficos da apresentação:
 
-Foto 1 – João e Vinicius apresentando o projeto
-<img src="https://github.com/user-attachments/assets/3d928a1b-f788-4882-8fb8-d68e6b97049d" width="600"/>
-Foto 2 – Participantes assistindo à apresentação
+**Foto 1 – Foto do time com o primeiro slide de fundo**  
 <img src="https://github.com/user-attachments/assets/438fbf04-a1b6-4350-b78c-62610ad438d8" width="600"/>
-Foto 3 – Projeção do slide inicial com o logo do LTD
+
+**Foto 2 – Foto de um integrante apresentando o sistema**  
 <img src="https://github.com/user-attachments/assets/743e5ddb-2b33-40eb-939d-efed01f0388b" width="600"/>
-Foto 4 – Foto geral com todos reunidos ao final da apresentação
+
+**Da esquerda para direita:** João Lucas Las Casas Alves (operando o notebook), Vinicius Mastrangelo Dias (apresentando)  
+**Apresentador:** João Lucas Las Casas Alves e Vinicius Mastrangelo Dias 
+
+**Foto 3 – Foto plano geral da apresentação de frente para o fundo da sala**  
+<img src="https://github.com/user-attachments/assets/3d928a1b-f788-4882-8fb8-d68e6b97049d" width="600"/>
+
+**Participantes do evento assistindo à apresentação**
+
+**Foto 4 – Foto plano geral da apresentação do fundo para a frente da sala**  
 <img src="https://github.com/user-attachments/assets/d7e46913-9226-474d-80f4-2677331e2e7f" width="600"/>
 
-### FENETEC: Feira de Negócios em Tecnologia:
+**Participantes do evento assistindo à apresentação**
 
-Imagens da apresentação:
-(Indisponiveis ainda)
+---
 
-Lista de presença:
-(Indisponivel ainda)
+## FENETEC: Feira de Negócios em Tecnologia
+
+**Imagens da apresentação:**  
+(Indisponíveis ainda)
+
+**Lista de presença:**  
+(Indisponível ainda)
+
 
 ---
 
