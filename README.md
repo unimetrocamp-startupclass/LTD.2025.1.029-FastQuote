@@ -133,7 +133,7 @@ Para representar a estrutura e o comportamento do sistema FastQuote, utilizamos 
 
 Representa os principais atores do sistema (cliente e vendedor) e suas interações com os processos do sistema.
 
-<img src="https://github.com/user-attachments/assets/ffd4ef4e-9620-400b-9368-ff5552ac76a0" width="1000"/>
+<img src="https://github.com/user-attachments/assets/f1440e65-96de-496d-9a39-2d0a93e62881" width="800"/>
 
 ---
 
@@ -141,7 +141,7 @@ Representa os principais atores do sistema (cliente e vendedor) e suas interaç�
 
 Mostra a estrutura de dados e os relacionamentos entre as entidades do banco de dados (cotação, itens e histórico).
 
-<img src="https://github.com/user-attachments/assets/cfa6899e-5b04-4030-a4cb-138e29c43d48" width="1000"/>
+<img src="https://github.com/user-attachments/assets/cfa6899e-5b04-4030-a4cb-138e29c43d48" width="800"/>
 
 ### Tecnologias Utilizadas
 
