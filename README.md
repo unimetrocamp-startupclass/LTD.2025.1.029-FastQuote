@@ -174,15 +174,145 @@ O sistema FastQuote foi desenvolvido com uma arquitetura dividida entre frontend
 
 ## 7. Resultados
 
-A implantação do sistema FastQuote trouxe melhorias significativas para a empresa AguiaFix:
+### Protótipo do Sistema (FastQuote)
 
-- Redução de mais de 60% no tempo médio de resposta das cotações.
-- Aumento da clareza nas informações recebidas dos clientes.
-- Automatização do processo de geração de cotações em PDF.
-- Melhoria na organização e rastreabilidade de pedidos recebidos.
-- Estímulo à adoção digital por parte dos vendedores.
+A seguir, são apresentadas as telas principais do sistema, acompanhadas da descrição das ações do usuário e reações do sistema.
 
-Além disso, os testes internos demonstraram a eficácia do sistema, validando a estrutura do formulário, o cruzamento com o estoque e a entrega via PDF.
+---
+
+### Tela 1 – Aba "Empresa"
+
+<img src="https://github.com/user-attachments/assets/dd36ccfe-22b4-4f44-be97-4cbe4de4026d" width="600" height="350"/>
+
+**Ação do usuário:**  
+O cliente insere os dados da empresa (nome, CNPJ, e-mail, telefone).
+
+**Reação do sistema:**  
+Valida os campos obrigatórios e aplica máscaras automáticas no CNPJ e telefone.
+
+---
+
+### Tela 2 – Aba "Cotação"
+
+<img src="https://github.com/user-attachments/assets/81fb93c1-0c9d-43f8-8d6e-1eeb769c3f0c" width="600" height="350"/>
+
+**Ação do usuário:**  
+Seleciona a finalidade da compra, o estado de entrega e o prazo desejado.
+
+**Reação do sistema:**  
+Valida os dados e armazena temporariamente no localStorage para continuidade do processo.
+
+---
+
+### Tela 3 – Aba "Itens"
+
+<img src="https://github.com/user-attachments/assets/0f33a8c9-720f-4328-abf4-4ed3ec7dc67b" width="600" height="350"/>
+
+**Ação do usuário:**  
+Seleciona os produtos a partir da planilha de estoque integrada e informa a quantidade. Pode também adicionar observações no campo “Comentários”.
+
+**Reação do sistema:**  
+Mostra o botão de “Adicionar Item”, permite adicionar mais linhas de item e valida quantidade > 0.
+
+---
+
+### Tela 4 – Aba "Revisão Final"
+
+<img src="https://github.com/user-attachments/assets/ed26d861-cc1b-4cd1-9493-6a6aea3e5972" width="600" height="350"/>
+
+**Ação do usuário:**  
+Visualiza um resumo completo de todos os dados preenchidos e envia a cotação.
+
+**Reação do sistema:**  
+Envia os dados para o backend e exibe alerta de sucesso. Os dados são processados para geração de PDF e envio por e-mail/WhatsApp.
+
+---
+
+### Confirmação por E-mail
+
+<img src="https://github.com/user-attachments/assets/9ab3af60-f866-465b-9490-89daa02b1df5" width="600" height="350"/>
+
+**Ação do sistema:**  
+Após envio do formulário, o sistema gera e envia automaticamente um PDF da cotação para o e-mail do responsável.
+
+---
+
+### Exemplo de PDF Gerado
+
+<img src="https://github.com/user-attachments/assets/07c23d9e-aed7-42b5-a136-7cdc43fffc15" width="600" height="350"/>
+
+**Descrição:**  
+O PDF exibe os dados da empresa, lista de itens solicitados, análise de disponibilidade de estoque, comentários, e o status de cada produto.
+
+## Códigos das principais funcionalidades
+
+Nesta seção estão os trechos mais relevantes do sistema FastQuote, com explicações embutidas diretamente abaixo de cada trecho.
+
+### Frontend – `index.html`
+
+```
+html
+<!-- Formulário dividido em etapas -->
+<form id="multiStepForm">
+  <fieldset class="step step-1">
+    <input type="text" id="empresa" name="empresa" required />
+  </fieldset>
+  <fieldset class="step step-2">
+    <select id="estado" name="estado" required></select>
+  </fieldset>
+</form>
+```
+Esse trecho mostra a estrutura principal do formulário multietapas, organizado por fieldset com IDs que controlam o fluxo de etapas no JS.
+
+### Frontend – script.js
+
+```
+// Armazena os dados temporariamente no navegador
+localStorage.setItem("formData", JSON.stringify(formData));
+
+// Envia os dados para o backend
+fetch("http://localhost:8080/cotacao", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(formData),
+});
+```
+Os dados são salvos no localStorage para não se perderem entre etapas e depois enviados via fetch ao backend Java.
+
+### Backend – CotacaoController.java
+
+```
+@PostMapping("/cotacao")
+public ResponseEntity<?> receberCotacao(@RequestBody CotacaoRequest request) {
+    CotacaoEntity cotacao = cotacaoService.processarCotacao(request);
+    return ResponseEntity.ok("Cotação recebida com sucesso.");
+}
+```
+Endpoint REST principal que recebe os dados enviados pelo formulário. Ele chama o serviço responsável por processar a cotação.
+
+### Backend – PdfGeneratorService.java
+
+```
+Document document = new Document();
+PdfWriter.getInstance(document, new FileOutputStream(path));
+document.open();
+document.add(new Paragraph("Cotação FastQuote"));
+```
+Trecho que gera o PDF com os dados da cotação usando a biblioteca OpenPDF. O arquivo é salvo localmente antes de ser enviado.
+
+### Backend – ItemEntity.java
+
+```
+@Entity
+public class ItemEntity {
+    private String nomeItem;
+    private int qtdSolicitada;
+
+    @ManyToOne
+    private CotacaoEntity cotacao;
+}
+```
+Essa entidade representa os itens da cotação. Está ligada à entidade CotacaoEntity e define nome do item e quantidade solicitada.
 
 ---
 
@@ -207,22 +337,22 @@ Após as entregas parciais, realizadas de acordo com os requisitos do sistema e 
 <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
 
   <div>
-    <img src="https://github.com/user-attachments/assets/4200b820-81dd-4927-8628-c9d7385a8874" width="475"/>
+    <img src="https://github.com/user-attachments/assets/4200b820-81dd-4927-8628-c9d7385a8874" width="475" height="500"/>
     <p><strong>Foto 1:</strong> Da esquerda para a direita: Vinicius Mastrangelo Dias (em pé) e Andre da Silva Franco (sentado) </p>
   </div>
 
   <div>
-    <img src="https://github.com/user-attachments/assets/46a2e138-380d-4d21-949c-5a7af2c65b67" width="475"/>
+    <img src="https://github.com/user-attachments/assets/46a2e138-380d-4d21-949c-5a7af2c65b67" width="475" height="500"/>
     <p><strong>Foto 2:</strong> Apresentador: Vinicius Mastrangelo Dias</p>
   </div>
 
   <div>
-    <img src="https://github.com/user-attachments/assets/4da8693d-77ee-4ab1-b98d-eaa60922c2af" width="475"/>
+    <img src="https://github.com/user-attachments/assets/4da8693d-77ee-4ab1-b98d-eaa60922c2af" width="475" height="500"/>
     <p><strong>Foto 3:</strong> Participantes da homologação assistindo à apresentação</p>
   </div>
 
 <div>
-  <img src="https://github.com/user-attachments/assets/82143322-66ed-445c-a659-5a7bdea8e201" width="475"/>
+  <img src="https://github.com/user-attachments/assets/82143322-66ed-445c-a659-5a7bdea8e201" width="475" height="500"/>
   <p><strong>Foto 4:</strong> Plano geral do local da reunião</p>
 </div>
 
@@ -232,7 +362,7 @@ Após as entregas parciais, realizadas de acordo com os requisitos do sistema e 
 
 Segue abaixo a lista de presentes na homologação do MVP.
 
-<img src="https://github.com/user-attachments/assets/d87996a1-2027-4bbf-b984-a23d42a2abbc" width="475"/>
+<img src="https://github.com/user-attachments/assets/d87996a1-2027-4bbf-b984-a23d42a2abbc" width="475" height="500"/>
 
 <p>Ao final da apresentação, o sistema foi homologado pelo cliente.</p>
 
@@ -261,16 +391,16 @@ https://www.linkedin.com/pulse/fastquote-apresenta%C3%A7%C3%A3o-parcial-vinicius
 ### Prints das Publicações
 
 **Perfil de João Lucas Las Casas Alves**  
-<img src="https://github.com/user-attachments/assets/689cb325-291a-4578-ac5c-8ed73234de06" width="600"/>
+<img src="https://github.com/user-attachments/assets/689cb325-291a-4578-ac5c-8ed73234de06" width="600" height="500"/>
 
 **Artigo de João Lucas**  
-<img src="https://github.com/user-attachments/assets/60b482ac-c8c5-49c3-8816-0c8940b4aa1e" width="600"/>
+<img src="https://github.com/user-attachments/assets/60b482ac-c8c5-49c3-8816-0c8940b4aa1e" width="600" height="500"/>
 
 **Perfil de Vinicius**  
-<img src="https://github.com/user-attachments/assets/77202e24-f524-417d-bf42-ddd4c9d2bd8e" width="600"/>
+<img src="https://github.com/user-attachments/assets/77202e24-f524-417d-bf42-ddd4c9d2bd8e" width="600" height="500"/>
 
 **Artigo de Vinicius Mastrangelo Dias**  
-<img src="https://github.com/user-attachments/assets/3fe2cc71-a51c-4730-a918-6fcc013dbca6" width="600"/>
+<img src="https://github.com/user-attachments/assets/3fe2cc71-a51c-4730-a918-6fcc013dbca6" width="600" height="500"/>
 
 ---
 
@@ -279,21 +409,21 @@ https://www.linkedin.com/pulse/fastquote-apresenta%C3%A7%C3%A3o-parcial-vinicius
 O projeto FastQuote foi apresentado oficialmente durante a Semana da Tecnologia, em um seminário com a presença de colegas, professores e avaliadores. Abaixo estão os registros fotográficos da apresentação:
 
 **Foto 1 – Foto do time com o primeiro slide de fundo**  
-<img src="https://github.com/user-attachments/assets/438fbf04-a1b6-4350-b78c-62610ad438d8" width="600"/>
+<img src="https://github.com/user-attachments/assets/438fbf04-a1b6-4350-b78c-62610ad438d8" width="600" height="500"/>
 
 **Foto 2 – Foto de um integrante apresentando o sistema**  
-<img src="https://github.com/user-attachments/assets/743e5ddb-2b33-40eb-939d-efed01f0388b" width="600"/>
+<img src="https://github.com/user-attachments/assets/743e5ddb-2b33-40eb-939d-efed01f0388b" width="600" height="500"/>
 
 **Da esquerda para direita:** João Lucas Las Casas Alves (operando o notebook), Vinicius Mastrangelo Dias (apresentando)  
 **Apresentador:** João Lucas Las Casas Alves e Vinicius Mastrangelo Dias 
 
 **Foto 3 – Foto plano geral da apresentação de frente para o fundo da sala**  
-<img src="https://github.com/user-attachments/assets/3d928a1b-f788-4882-8fb8-d68e6b97049d" width="600"/>
+<img src="https://github.com/user-attachments/assets/3d928a1b-f788-4882-8fb8-d68e6b97049d" width="600" height="500"/>
 
 **Participantes do evento assistindo à apresentação**
 
 **Foto 4 – Foto plano geral da apresentação do fundo para a frente da sala**  
-<img src="https://github.com/user-attachments/assets/d7e46913-9226-474d-80f4-2677331e2e7f" width="600"/>
+<img src="https://github.com/user-attachments/assets/d7e46913-9226-474d-80f4-2677331e2e7f" width="600" height="500"/>
 
 **Participantes do evento assistindo à apresentação**
 
