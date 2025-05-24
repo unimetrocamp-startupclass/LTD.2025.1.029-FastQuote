@@ -178,8 +178,6 @@ O sistema FastQuote foi desenvolvido com uma arquitetura dividida entre frontend
 
 A seguir, são apresentadas as telas principais do sistema, acompanhadas da descrição das ações do usuário e reações do sistema.
 
----
-
 ### Tela 1 – Aba "Empresa"
 
 <img src="https://github.com/user-attachments/assets/dd36ccfe-22b4-4f44-be97-4cbe4de4026d" width="600" height="350"/>
@@ -189,8 +187,6 @@ O cliente insere os dados da empresa (nome, CNPJ, e-mail, telefone).
 
 **Reação do sistema:**  
 Valida os campos obrigatórios e aplica máscaras automáticas no CNPJ e telefone.
-
----
 
 ### Tela 2 – Aba "Cotação"
 
@@ -202,8 +198,6 @@ Seleciona a finalidade da compra, o estado de entrega e o prazo desejado.
 **Reação do sistema:**  
 Valida os dados e armazena temporariamente no localStorage para continuidade do processo.
 
----
-
 ### Tela 3 – Aba "Itens"
 
 <img src="https://github.com/user-attachments/assets/0f33a8c9-720f-4328-abf4-4ed3ec7dc67b" width="600" height="350"/>
@@ -213,8 +207,6 @@ Seleciona os produtos a partir da planilha de estoque integrada e informa a quan
 
 **Reação do sistema:**  
 Mostra o botão de “Adicionar Item”, permite adicionar mais linhas de item e valida quantidade > 0.
-
----
 
 ### Tela 4 – Aba "Revisão Final"
 
@@ -226,8 +218,6 @@ Visualiza um resumo completo de todos os dados preenchidos e envia a cotação.
 **Reação do sistema:**  
 Envia os dados para o backend e exibe alerta de sucesso. Os dados são processados para geração de PDF e envio por e-mail/WhatsApp.
 
----
-
 ### Confirmação por E-mail
 
 <img src="https://github.com/user-attachments/assets/9ab3af60-f866-465b-9490-89daa02b1df5" width="600" height="350"/>
@@ -235,14 +225,14 @@ Envia os dados para o backend e exibe alerta de sucesso. Os dados são processad
 **Ação do sistema:**  
 Após envio do formulário, o sistema gera e envia automaticamente um PDF da cotação para o e-mail do responsável.
 
----
-
 ### Exemplo de PDF Gerado
 
 <img src="https://github.com/user-attachments/assets/07c23d9e-aed7-42b5-a136-7cdc43fffc15" width="600" height="350"/>
 
 **Descrição:**  
 O PDF exibe os dados da empresa, lista de itens solicitados, análise de disponibilidade de estoque, comentários, e o status de cada produto.
+
+---
 
 ## Códigos das principais funcionalidades
 
